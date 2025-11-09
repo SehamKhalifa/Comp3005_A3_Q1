@@ -1,4 +1,6 @@
-# Student Management System
+## Student Management System
+Youtube Channel Handle: @SehamKhalifa-3005
+URL:  https://www.youtube.com/watch?v=wGEtR1acooU
 
 This Python application connects to a PostgreSQL database to manage student records.  
 It allows and give users option to:
@@ -7,8 +9,7 @@ It allows and give users option to:
 - Update a student's email
 - Delete a student
 
-# Requirements
-
+## Requirements
 - Python 3.10 or newer
 - PostgreSQL database
 - `psycopg2` library installed
@@ -27,10 +28,13 @@ def get_connection():
         password="your_password"
     )
 
-# Steps to run application:
+## Setup
 
-#Make sure PostgreSQL is running and the students table exists:
+### Database Setup
 
+Make sure PostgreSQL is running and the `students` table exists. You can create it using:
+
+```sql
 CREATE TABLE students (
     student_id SERIAL PRIMARY KEY,
     first_name VARCHAR(50),
@@ -52,3 +56,4 @@ python main.py
 app.py  #Main program logic
 db_config.py # Database connection setup
 README.md  # Setup and run instructions
+
