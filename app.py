@@ -66,12 +66,12 @@ def delete_student(conn, cursor):
 
     except Exception as e:
         print("failed to delete student: " + str(e))
-
 '''
-Resets the students table to a known state with predefined records
+Reset Table to predefined state
 '''
 def reset_students_table(conn, cursor):
-    cursor.execute("DELETE FROM students")  #clear existing records and reset table to restart fresh
+    cursor.execute("DELETE FROM students")  # remove all rows
+    cursor.execute("ALTER SEQUENCE students_student_id_seq RESTART WITH 1")  # reset ID counter
     cursor.execute("""
         INSERT INTO students (first_name, last_name, email, enrollment_date) VALUES
         ('John', 'Doe', 'john.doe@example.com', '2023-09-01'),
@@ -79,7 +79,6 @@ def reset_students_table(conn, cursor):
         ('Jim', 'Beam', 'jim.beam@example.com', '2023-09-02')
     """)
     conn.commit()
-
 '''
 Print the different commands
 '''
@@ -94,9 +93,11 @@ your options are:
     """)
 
 def main():
-    with get_connection() as conn: 
+    with get_connection() as conn:  
         with conn.cursor() as cursor:
+            # Reset table at the start to ensure initial data and IDs start at 1
             reset_students_table(conn, cursor)  
+
         print("Welcome to the Student Management System!")
         print_options()
 
